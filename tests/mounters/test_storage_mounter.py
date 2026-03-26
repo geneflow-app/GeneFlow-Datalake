@@ -11,6 +11,8 @@ from src.mounters.storage import StorageMounter, TraceManifest, ChunkMetadata
 def mock_connection():
     """Create a mock storage connection."""
     conn = MagicMock()
+    conn.connect = AsyncMock()
+    conn.close = AsyncMock()
     conn.ensure_bucket = AsyncMock()
     conn.put_object = AsyncMock(return_value="etag-123")
     conn.get_object = AsyncMock()
